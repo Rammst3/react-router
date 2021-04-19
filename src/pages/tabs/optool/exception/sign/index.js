@@ -5,6 +5,7 @@ import { debounce } from 'lodash'
 import utils from '@utils'
 import { injectIntl } from 'react-intl'
 import styles from './index.less'
+import { useForm } from 'antd/lib/form/Form'
 
 const { TextArea } = Input
 const FormItem = Form.Item
@@ -16,6 +17,7 @@ const Sign = (props) => {
   const [nos, setNos] = useState('')
   const [status, setStatus] = useState('')
   const [help, setHelp] = useState('')
+  const [form] = Form.useForm()
 
   /**
    * 校验字符串是否合法
@@ -55,11 +57,11 @@ const Sign = (props) => {
         break
       case 1:
         setStatus('error')
-        setHelp(`${intl.formatMessage({ id: 'overline' })}` + `,${res.num}/100`)
+        setHelp(utils.translateText({ id: 'overline' }) + `,${res.num}/100`)
         break
       case 2:
         setStatus('error')
-        setHelp(`${intl.formatMessage({ id: 'notEmpty' })}`)
+        setHelp(utils.translateText({ id: 'notEmpty' }))
         break
       default:
         break
@@ -69,16 +71,16 @@ const Sign = (props) => {
 
   const handleSubmit = (e) => {
     const res = handleValid(nos)
-    console.log("res", res)
+    // console.log("res", res)
     if (res.flag === 0) {
       const data = { trackingNos: res.result }
       axios.post('/manager/operation_tools/t4_stock_rate/exception_process', JSON.stringify(data))
         .then(resp => {
-          utils.showMessageSuccess(`${intl.formatMessage({ id: 'opSuccess' })}`)
+          utils.showMessageSuccess(utils.translateText({ id: 'opSuccess' }))
           setNos('')
         })
         .catch(err => {
-          utils.showModalError(`${intl.formatMessage({ id: 'opFail' })}`, err)
+          utils.showModalError(utils.translateText({ id: 'opFail' }), err)
         })
     }
   }
@@ -90,11 +92,11 @@ const Sign = (props) => {
     <aside className={styles.content}>
       <div className={styles.header}>
         <Breadcrumb />
-        <div className={styles.title}>{`${intl.formatMessage({ id: 'Processe Sign yield' })}`}</div>
+        <div className={styles.title}>{utils.translateText({ id: 'Processe Sign yield' })}</div>
       </div>
       <div className={styles.body}>
         <div className={styles.input_con}>
-          <Form>
+          <Form form={form}>
             <FormItem validateStatus={status} help={help}>
               <TextArea
                 autoSize={{ minRows: 18, maxRows: 25 }}
@@ -104,19 +106,19 @@ const Sign = (props) => {
             </FormItem>
           </Form>
           <Popconfirm
-            title={`${intl.formatMessage({ id: 'above logistics' })}`}
+            title={utils.translateText({ id: 'above logistics' })}
             onConfirm={(e) => handleSubmit(e)}
             onCancel={() => { }}
-            okText={`${intl.formatMessage({ id: 'modal confirm' })}`}
-            cancelText={`${intl.formatMessage({ id: 'modal cancel' })}`}
+            okText={utils.translateText({ id: 'modal confirm' })}
+            cancelText={utils.translateText({ id: 'modal cancel' })}
           >
-            <Button className={styles.btn_submit} type="primary">{`${intl.formatMessage({ id: 'overdueConfirm' })}`}</Button>
+            <Button className={styles.btn_submit} type="primary">{utils.translateText({ id: 'overdueConfirm' })}</Button>
           </Popconfirm>
         </div>
         <div className={styles.text_con}>
-          <p className={styles.info}>1.{`${intl.formatMessage({ id: 'a time' })}`}</p>
-          <p className={styles.info}>2.{`${intl.formatMessage({ id: 'funcFit' })}`}</p>
-          <p className={styles.info}>3.{`${intl.formatMessage({ id: 'carefullyUse' })}`}</p>
+          <p className={styles.info}>1.{utils.translateText({ id: 'a time' })}</p>
+          <p className={styles.info}>2.{utils.translateText({ id: 'funcFit' })}</p>
+          <p className={styles.info}>3.{utils.translateText({ id: 'carefullyUse' })}</p>
         </div>
       </div>
     </aside>

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Button } from 'antd'
 import { injectIntl } from 'react-intl'
-import Breadcrumb from '@components/breadcrumb/Breadcrumb'
 import utils from '@utils'
+import Breadcrumb from '@components/breadcrumb/Breadcrumb'
 import TableBlock from '@components/table/TableBlock'
 import SearchFormClass from './searchForm'
 import styles from './index.less'
@@ -14,7 +14,7 @@ class User extends PureComponent {
     this.state = {
       columns: [
         {
-          title: `${intl.formatMessage({ id: 'createTime' })}`,
+          title: utils.translateText({ id: 'createTime' }),
           dataIndex: 'createTime',
           width: 200,
           sorter: (a, b) => a.createTime - b.createTime,
@@ -23,25 +23,25 @@ class User extends PureComponent {
           }
         },
         {
-          title: `${intl.formatMessage({ id: 'name' })}`,
+          title: utils.translateText({ id: 'name' }),
           dataIndex: 'name',
           width: 100,
           render: (text) => text ? text : 0
         },
         {
-          title: `${intl.formatMessage({ id: 'type' })}`,
+          title: utils.translateText({ id: 'type' }),
           dataIndex: 'type',
           width: 100,
         },
         {
-          title: `${intl.formatMessage({ id: 'code' })}`,
+          title: utils.translateText({ id: 'code' }),
           dataIndex: 'supplierUuid',
           width: 100,
         },
         {
-          title: `${intl.formatMessage({ id: 'action' })}`,
+          title: utils.translateText({ id: 'action' }),
           dataIndex: 'action',
-          render: () => <a onClick={() => {}}>{`${intl.formatMessage({ id: 'delete' })}`}</a>,
+          render: () => <a onClick={() => {}}>{utils.translateText({ id : 'delete'})}</a>,
         },
       ],
       data: [],
@@ -104,7 +104,7 @@ class User extends PureComponent {
       },
       paginationProps: pagination,
       searchCB: this.handleSearch,
-      leftTopNode: [<Button key='export' type="primary" onClick={(e) => this.exportData(e)}>{`${intl.formatMessage({ id: 'exportCurrentPage' })}`}</Button> , <Button key='download' type="primary" onClick={(e) => this.download(e)}>{`${intl.formatMessage({ id: 'downloadFile' })}`}</Button>]
+      leftTopNode: [<Button key='export' type="primary" onClick={(e) => this.exportData(e)}>{utils.translateText({ id : 'exportCurrentPage'})}</Button> , <Button key='download' type="primary" onClick={(e) => this.download(e)}>{utils.translateText({ id : 'downloadFile'})}</Button>]
     }
 
     return (

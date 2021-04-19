@@ -26,7 +26,7 @@ class Logs extends PureComponent {
             <Breadcrumb />
           </div>
           <div className={styles.title}>
-            <h2 className='colorRed'>{`${intl.formatMessage({ id: 'handleLog' })}`}</h2>
+            <h2 className='colorRed'>{utils.translateText({ id : 'handleLog'})}</h2>
             <Button type="primary" onClick={this.toSystem}>去系统配置页面</Button>
           </div>
         </div>

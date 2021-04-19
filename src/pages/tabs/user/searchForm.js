@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Button, Select } from 'antd'
 import { injectIntl } from 'react-intl'
-import LimitInput from '@components/input/LimitInput'
 import utils from '@utils'
+import LimitInput from '@components/input/LimitInput'
 import styles from './index.less'
 
 const FormItem = Form.Item
@@ -35,7 +35,7 @@ class SearchFormClass extends PureComponent {
 
     axios.get('/api/user/list', { params })
       .then(resp => {
-        console.log("resp", resp)
+        // console.log("resp", resp)
         const { rows, totalCount } = resp || {}
         if (rows) {
           onResultCB && onResultCB({
@@ -65,16 +65,16 @@ class SearchFormClass extends PureComponent {
       <Form className={styles.form} ref={this.formRef} onFinish={this.submitSearch}>
         <Row gutter={24}>
           <Col span={24 / col}>
-            <FormItem label={`${intl.formatMessage({ id: 'code' })}`} name='code' rules={[{
+            <FormItem label={utils.translateText({ id : 'code'})} name='code' rules={[{
               required: true,
-              message: `${intl.formatMessage({ id: 'Code cannot be empty' })}`
+              message: utils.translateText({ id : 'Code cannot be empty'})
             }]}>
-              <LimitInput placeholder={`${intl.formatMessage({ id: 'Enter Code' })}`} />
+              <LimitInput placeholder={utils.translateText({ id : 'Enter Code'})} />
             </FormItem>
           </Col>
           <Col span={24 / col}>
-            <FormItem label={`${intl.formatMessage({ id: 'type' })}`} name='type' >
-              <Select placeholder={`${intl.formatMessage({ id: 'Choose Type' })}`} allowClear>
+            <FormItem label={utils.translateText({ id : 'type'})} name='type' >
+              <Select placeholder={utils.translateText({ id : 'Choose Type'})} allowClear>
                 <Option value="inconer">inconer</Option>
                 <Option value="outconer">outconer</Option>
               </Select>
@@ -82,7 +82,7 @@ class SearchFormClass extends PureComponent {
           </Col>
           <Col span={24 / col}>
             <FormItem label={''}>
-              <Button key='userSearch' type="primary" htmlType="submit" loading={loading}>{`${intl.formatMessage({ id: 'search' })}`}</Button>
+              <Button key='userSearch' type="primary" htmlType="submit" loading={loading}>{utils.translateText({ id : 'search'})}</Button>
             </FormItem>
           </Col>
         </Row>

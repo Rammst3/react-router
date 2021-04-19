@@ -33,11 +33,10 @@ export function clearCookie(cname) {
   setCookie(cname, "", -1)
 }
 
-// 设置localhost环境的cookie
+// 设置开发环境的cookie
 export function devSetCookieToken() {
   console.log("NODE_ENV", NODE_ENV)
-  // 注意local才是本地开发环境，dev是develop分支环境
-  if (NODE_ENV === 'local' || NODE_ENV === 'dev') {
+  if (NODE_ENV === 'dev') {
     setCookie('token', '123456', 1)
   }
 }

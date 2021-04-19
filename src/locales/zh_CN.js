@@ -29,8 +29,9 @@ export default {
   'Run Log': '运行日志',
   'Handle Log': '操作日志',
   'Login Log': '登录日志',
-  'virtuatTable': '虚拟表格',
+  'virtuatTable': '总结表格',
   'dataExchange': '数据转换',
+  'dataTransfer': '数据格式转换',
   'opTool': '运营工具',
   'exceptionHandle': '异常处理',
   'exportCurrentPage': '导出当前页',
@@ -59,4 +60,5 @@ export default {
   'a time': '每行一个物流单号，每次最多100个',
   'search': '查询',
   'downloadFile': '下载',
+  'welcome to use': '欢迎使用xxx系统'
 }

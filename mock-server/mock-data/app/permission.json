@@ -12,6 +12,8 @@
     "menu.users",
     "menu.userManage",
     "menu.roleManage",
-    "module.adminButton"
+    "module.adminButton",
+    "menu.handleLog",
+    "menu.loginLog"
   ]
 }

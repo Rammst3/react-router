@@ -16,7 +16,7 @@ const SearchForm = (props) => {
   }, [props.searchFlag])
 
   const submitSearch = (value) => {
-    console.log(value)
+    // console.log(value)
     handleSearch({ pageNum: 1, ...value })
   }
 
@@ -67,7 +67,7 @@ const SearchForm = (props) => {
         </Col>
         <Col span={8}>
           <FormItem label={''}>
-            <Button key='roleSearch' type="primary" htmlType="submit" loading={loading}>{`${intl.formatMessage({ id: 'search' })}`}</Button>
+            <Button key='roleSearch' type="primary" htmlType="submit" loading={loading}>{utils.translateText({ id : 'search'})}</Button>
           </FormItem>
         </Col>
       </Row>

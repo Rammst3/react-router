@@ -4,6 +4,7 @@ import { checkAccessPermission } from './permission'
 import { downloadFile, downloadFileByUrl } from './download-file'
 import { exportPageData } from './exportTableData'
 import { getValidProperty, htmlText, htmlIsEmpty, checkValidValue } from './handleForm'
+import { translateText } from './translate'
 
 export default {
   showMessageError,
@@ -21,4 +22,5 @@ export default {
   htmlIsEmpty,
   checkValidValue,
   downloadFileByUrl,
+  translateText
 }

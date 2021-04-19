@@ -10,76 +10,67 @@ const FormItem = Form.Item
 
 // 缺货率处理
 const OutOfStock = (props) => {
-  const {intl} = props
+  const { intl } = props
+  const [form] = Form.useForm()
   const handleSubmit = (e) => {
-    e.preventDefault()
-    props.form.validateFields((err, values) => {
-      if (!err) {
-        const { nos } = values
-        const data = nos.replace(/\n/g, ',')
-        Modal.confirm({
-          title: `${intl.formatMessage({ id: 'remind' })}`,
-          content: `${intl.formatMessage({ id: 'stock modal content' })}`,
-          okText: `${intl.formatMessage({ id: 'modal confirm' })}`,
-          cancelText: `${intl.formatMessage({ id: 'modal cancel' })}`,
-          onOk: () => { handleRequest(data) }
-        })
-      }
-    })
+    const data = form.getFieldValue('nos') == undefined ? '' : form.getFieldValue('nos').replace(/\n/g, ',')
+    if (data) {
+      Modal.confirm({
+        title: utils.translateText({ id: 'remind' }),
+        content: utils.translateText({ id: 'stock modal content' }),
+        okText: utils.translateText({ id: 'modal confirm' }),
+        cancelText: utils.translateText({ id: 'modal cancel' }),
+        onOk: () => { handleRequest(data) }
+      })
+    }
   }
 
   const handleRequest = (values) => {
     const data = { purchaseOrderUuids: values }
     axios.post('/manager/operation_tools/oos_rate/exception_process', JSON.stringify(data))
-    .then(resp => {
-      utils.showMessageSuccess(`${intl.formatMessage({ id: 'opSuccess' })}`)
-    })
-    .catch(err => {
-      utils.showModalError(`${intl.formatMessage({ id: 'opFail' })}`, err)
-    })
+      .then(resp => {
+        utils.showMessageSuccess(utils.translateText({ id: 'opSuccess' }))
+      })
+      .catch(err => {
+        utils.showModalError(utils.translateText({ id: 'opFail' }), err)
+      })
   }
-
-  const { getFieldDecorator } = props.form
 
   return (
     <aside className={styles.content}>
       <div className={styles.header}>
         <Breadcrumb />
-        <div className={styles.title}>{`${intl.formatMessage({ id: 'Processe Out of stock' })}`}</div>
+        <div className={styles.title}>{utils.translateText({ id: 'Processe Out of stock' })}</div>
       </div>
       <div className={styles.body}>
         <div className={styles.input_con}>
-          <Form>
-            <FormItem>
-              {
-                getFieldDecorator("nos", {
-                  rules: [{ required: true, whitespace: true, message: `${intl.formatMessage({ id: 'purchaseInput' })}` }],
-                })(
-                <LimitTextArea 
-                  autoSize={{ minRows: 18, maxRows: 25 }}
-                  sep={'\n'}
-                  maxLength={100}
-                  placeholder={`${intl.formatMessage({ id: 'purchasePerLine' })}`} />)
-              }
+          <Form form={form}>
+            <FormItem name='nos' rules={[{ required: true, whitespace: true, message: utils.translateText({ id: 'purchaseInput' }) }]}>
+              <LimitTextArea
+                autoSize={{ minRows: 18, maxRows: 25 }}
+                sep={'\n'}
+                maxLength={100}
+                placeholder={`${intl.formatMessage({ id: 'purchasePerLine' })}`}
+              />
             </FormItem>
             <FormItem>
-              <Button 
-                type="primary" 
-                htmlType="submit" 
+              <Button
+                type="primary"
+                htmlType="submit"
                 onClick={(e) => handleSubmit(e)}>
-                  {`${intl.formatMessage({ id: 'confirmStock' })}`}
+                {utils.translateText({ id: 'confirmStock' })}
               </Button>
             </FormItem>
           </Form>
         </div>
         <div className={styles.text_con}>
-          <p className={styles.info}>1.{`${intl.formatMessage({ id: 'per at a time' })}`}</p>
-          <p className={styles.info}>2.{`${intl.formatMessage({ id: 'funcFit' })}`}</p>
-          <p className={styles.info}>3.{`${intl.formatMessage({ id: 'carefullyUse' })}`}</p>
+          <p className={styles.info}>1.{utils.translateText({ id: 'per at a time' })}</p>
+          <p className={styles.info}>2.{utils.translateText({ id: 'funcFit' })}</p>
+          <p className={styles.info}>3.{utils.translateText({ id: 'carefullyUse' })}</p>
         </div>
       </div>
     </aside>
   )
 }
 
-export default Form.create()(injectIntl(OutOfStock))
+export default injectIntl(OutOfStock)

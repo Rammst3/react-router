@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Button } from 'antd'
 import { injectIntl } from 'react-intl'
+import utils from '@utils'
 import Breadcrumb from '@components/breadcrumb/Breadcrumb'
 import TableBlock from '@components/table/TableBlock'
 import SearchForm from './SearchForm'
@@ -13,23 +14,23 @@ class Role extends PureComponent {
     this.state = {
       columns: [
         {
-          title: `${intl.formatMessage({ id: 'name' })}`,
+          title: utils.translateText({ id: 'name' }),
           dataIndex: 'name',
           width: 100,
           render: (text) => text ? text : 0
         },
         {
-          title: `${intl.formatMessage({ id: 'perms' })}`,
+          title: utils.translateText({ id: 'perms' }),
           dataIndex: 'perms',
           width: 200,
         },
         {
-          title: `${intl.formatMessage({ id: 'creator' })}`,
+          title: utils.translateText({ id: 'creator' }),
           dataIndex: 'creator',
           width: 100,
         },
         {
-          title: `${intl.formatMessage({ id: 'createTime' })}`,
+          title: utils.translateText({ id: 'createTime' }),
           dataIndex: 'createTime',
           width: 200,
           render(text) {
@@ -37,9 +38,9 @@ class Role extends PureComponent {
           }
         },
         {
-          title: `${intl.formatMessage({ id: 'action' })}`,
+          title: utils.translateText({ id: 'action' }),
           dataIndex: 'action',
-          render: () => <a onClick={() => { }}>{`${intl.formatMessage({ id: 'delete' })}`}</a>,
+          render: () => <a onClick={() => { }}>{utils.translateText({ id: 'delete' })}</a>,
         },
       ],
       list: [],
@@ -105,7 +106,7 @@ class Role extends PureComponent {
       paginationProps: pagination,
       searchCB: this.handleSearch,
       showBottomBlock: true,
-      leftTopNode: <Button key='add' type="primary" onClick={(e) => this.handleAdd(e)}>{`${intl.formatMessage({ id: 'add' })}`}</Button>
+      leftTopNode: <Button key='add' type="primary" onClick={(e) => this.handleAdd(e)}>{utils.translateText({ id: 'add' })}</Button>
     }
     return (
       <aside className={styles.content} >

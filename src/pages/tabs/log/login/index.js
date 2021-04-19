@@ -22,7 +22,7 @@ class Logs extends PureComponent {
             <Breadcrumb />
           </div>
           <div className={styles.title}>
-            <h2 className='colorRed'>{`${intl.formatMessage({ id: 'loginLog' })}`}</h2>
+            <h2 className='colorRed'>{utils.translateText({ id : 'loginLog'})}</h2>
           </div>
         </div>
       </aside>

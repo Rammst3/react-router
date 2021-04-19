@@ -25,7 +25,7 @@ const model = {
     ],
     menuList: [],
     existRoute: {}, // 用户路由列表
-    isNeedPermission: false, /** 是否需要菜单-路由权限控制，默认需要true; 若设置为false，所有的permKey可以去掉 */
+    isNeedPermission: true, /** 是否需要菜单-路由权限控制，默认需要true; 若设置为false，所有的permKey可以去掉 */
   },
   // reducer
   reducers: {
@@ -84,6 +84,7 @@ const model = {
   effects: {
     'app/get/permission': function*({ payload }, { call, put }) {
       const resp = yield call(getUserPermList, payload)
+      // console.log(resp,"resp")
       const { is_success, username, perms } = resp && resp.data || {}
       if (resp && is_success) {
         yield put({ type: 'app/get/permission/success', payload: { permList: perms, username }})

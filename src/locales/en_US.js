@@ -31,6 +31,7 @@ export default {
   'Login Log': 'Login Log',
   'virtuatTable': 'virtuatTable',
   'dataExchange': 'dataExchange',
+  'dataTransfer': 'dataFormatTransfer',
   'opTool': 'opTool',
   'exceptionHandle': 'exceptionHandle',
   'exportCurrentPage': 'exportCurrentPage',
@@ -59,4 +60,5 @@ export default {
   'a time': 'One logistics order number per line, up to 100 at a time',
   'search': 'search',
   'downloadFile': 'downloadFile',
+  'welcome to use': 'welcome to use xxx system'
 }
